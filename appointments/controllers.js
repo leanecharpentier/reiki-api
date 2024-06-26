@@ -31,11 +31,9 @@ export async function getAppointments(req, res) {
         } catch (error) {
             return res.status(500).json("Error")
         }
-    } else if (req.query.date) {
-        let startDate = req.query.date
-        startDate = new Date(startDate)
-        let endDate = new Date(startDate);
-        endDate.setMonth(startDate.getMonth() + 1);
+    } else if (req.query.startDate && req.query.endDate) {
+        const startDate = req.query.startDate
+        const endDate = req.query.endDate
         try {
             const result = await Appointment.aggregate([
                 {
